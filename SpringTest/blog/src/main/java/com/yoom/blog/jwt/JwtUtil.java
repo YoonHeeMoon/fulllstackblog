@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.yoom.blog.RestException;
 import com.yoom.blog.User;
+import com.yoom.blog.ErrorCode;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -52,6 +53,16 @@ public class JwtUtil {
     public String getIdFromToken(String token) {
          return (String) getClaims(token).get("id");
     }
+    public boolean isExpired(String token){
+        Date now = new Date();
+        String tokenonly = token.substring(0,token.lastIndexOf(".")+1);
+        Date exp = ((Claims)Jwts.parser().parse(tokenonly).getBody()).getExpiration();
+        if(now.after(exp)){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     public boolean isUsable(String token){
 		try{
@@ -61,7 +72,7 @@ public class JwtUtil {
 			return true;
 			
 		}catch (Exception e) {
-            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR,"Unusable Token");
+            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR,ErrorCode.UNUSABLE_TOKEN);
 		}
 	}
 }

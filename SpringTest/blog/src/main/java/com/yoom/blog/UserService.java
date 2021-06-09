@@ -19,8 +19,3 @@ public class UserService {
         }
     }
 }
-
-enum ErrorCode{
-    PASSWORD_NOT_FOUND,
-    ID_NOT_FOUND
-}

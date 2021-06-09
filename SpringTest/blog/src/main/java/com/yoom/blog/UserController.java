@@ -1,7 +1,6 @@
 package com.yoom.blog;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import com.yoom.blog.jwt.JwtUtil;
 
@@ -24,11 +23,9 @@ public class UserController {
         map.put("RToken", jwtUtil.createRefreshToken(user));
         
         return map;
-    }
-    @GetMapping("/hi")
-    public ResponseEntity hi (){
-        return new ResponseEntity("ho",HttpStatus.OK);
-    }
+    } 
+    
+    
     @GetMapping("/er")
     public ResponseEntity eResponseEntity(){
         return new ResponseEntity("er",HttpStatus.INTERNAL_SERVER_ERROR);

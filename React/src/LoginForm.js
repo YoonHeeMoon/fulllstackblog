@@ -1,19 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
+import isLogined from "./isLogined";
 
 const LoginForm = () => {
     const [id,setId] = useState('');
     const [pw,setPw] = useState('');
-    const isLogin = false;
 
     const submit = (e)=>{
         e.preventDefault();
         axios.post('http://localhost:8080/login',{id,pw})
         .then(res =>{
             console.log(res.data)
-            localStorage.setItem("Atoken",res.data.AToken)
-            localStorage.setItem("Rtoken",res.data.RToken)
-            localStorage.setItem("username",id)
+            localStorage.setItem("Atoken",res.data.AToken);
+            localStorage.setItem("Rtoken",res.data.RToken);
+            localStorage.setItem("username",id);
+            isLogined();
+
         }).catch(err =>{
             console.log(err.response.data.message)
             var message =""
@@ -32,7 +34,6 @@ const LoginForm = () => {
     }
     return ( 
         <div className="login">
-            {isLogin && <dev>hi</dev>}
             <form onSubmit={submit}>
                 <label>ID</label>
                 <input className="loginInput"
