@@ -4,6 +4,8 @@ import { useState } from "react";
 const LoginForm = () => {
     const [id,setId] = useState('');
     const [pw,setPw] = useState('');
+    const isLogin = false;
+
     const submit = (e)=>{
         e.preventDefault();
         axios.post('http://localhost:8080/login',{id,pw})
@@ -12,12 +14,25 @@ const LoginForm = () => {
             localStorage.setItem("Atoken",res.data.AToken)
             localStorage.setItem("Rtoken",res.data.RToken)
             localStorage.setItem("username",id)
-        }).catch(e =>{
-            console.log(e.message)
+        }).catch(err =>{
+            console.log(err.response.data.message)
+            var message =""
+            switch(err.response.data.message){
+                case "PASSWORD_NOT_FOUND":
+                    message = "패스워드를 찾을 수 없습니다.";
+                    break;
+                case "ID_NOT_FOUND":
+                    message = "아이디를 찾을 수 없습니다."
+                    break;
+                default:
+
+            }
+            alert(message)
         })
     }
     return ( 
         <div className="login">
+            {isLogin && <dev>hi</dev>}
             <form onSubmit={submit}>
                 <label>ID</label>
                 <input className="loginInput"

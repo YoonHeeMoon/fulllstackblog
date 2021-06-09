@@ -7,9 +7,9 @@ public class RestException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
 	private HttpStatus status;
-	private String message;
+	private ErrorCode message;
 
-	public RestException(HttpStatus status, String message) {
+	public RestException(HttpStatus status, ErrorCode message) {
 		this.status = status;
 		this.message = message;
 	}
@@ -23,6 +23,6 @@ public class RestException extends RuntimeException {
 	}
 
 	public String getMessage() {
-		return message;
+		return message.toString();
 	}
 }

@@ -24,8 +24,6 @@ public class UserController {
         map.put("RToken", jwtUtil.createRefreshToken(user));
         
         return map;
-        
-        //return new ResponseEntity(token,HttpStatus.OK);
     }
     @GetMapping("/hi")
     public ResponseEntity hi (){

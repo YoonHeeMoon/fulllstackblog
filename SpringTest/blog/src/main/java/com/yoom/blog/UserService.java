@@ -12,10 +12,15 @@ public class UserService {
         String id = user.getId();
         User tmp = dao.findOneById(id);
         if(tmp==null){
-            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR, "ID not found");
+            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.ID_NOT_FOUND);
         }
         if(!tmp.getPw().equals(user.getPw())){
-            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR, "Pw not matched");
+            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.PASSWORD_NOT_FOUND);
         }
     }
+}
+
+enum ErrorCode{
+    PASSWORD_NOT_FOUND,
+    ID_NOT_FOUND
 }
