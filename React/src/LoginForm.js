@@ -14,7 +14,7 @@ const LoginForm = () => {
             localStorage.setItem("Atoken",res.data.AToken);
             localStorage.setItem("Rtoken",res.data.RToken);
             localStorage.setItem("username",id);
-            isLogined();
+            this.props.isLoggedIn = isLogined();
 
         }).catch(err =>{
             console.log(err.response.data.message)
@@ -55,5 +55,4 @@ const LoginForm = () => {
         </div>
     );
 }
- 
 export default LoginForm;
