@@ -9,6 +9,7 @@ const isLogined = () =>{
            token:RToken}})
        .then(res =>{
         console.log(res.data)
+        return true;
        })
     }
 }
