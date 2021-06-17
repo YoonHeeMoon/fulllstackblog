@@ -1,5 +1,7 @@
 package com.yoom.blog;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.yoom.blog.jwt.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,8 @@ public class TokenController {
     @Autowired JwtUtil jwtUtil;
 
     @GetMapping("/exp")
-    public Boolean isExp (@RequestParam("token") String token){
-        System.out.println("token/exp");
+    public Boolean isExp (HttpServletRequest request){
+        final String token = request.getHeader("Authorization");
         return jwtUtil.isExpired(token);
     }   
 }

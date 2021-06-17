@@ -21,13 +21,16 @@ public class UserController {
         HashMap<String,String> map = new HashMap<String,String>();
         map.put("AToken", jwtUtil.createToken(user));
         map.put("RToken", jwtUtil.createRefreshToken(user));
-        
         return map;
     } 
     
     
     @GetMapping("/er")
     public ResponseEntity eResponseEntity(){
+        return new ResponseEntity("er",HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @GetMapping("/hello")
+    public ResponseEntity ResponseEntity(){
         return new ResponseEntity("er",HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

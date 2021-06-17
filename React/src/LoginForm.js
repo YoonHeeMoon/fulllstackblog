@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import isLogined from "./isLogined";
+import { useHistory } from "react-router";
 
 const LoginForm = () => {
     const [id,setId] = useState('');
     const [pw,setPw] = useState('');
+    const history = useHistory();
 
     const submit = (e)=>{
         e.preventDefault();
@@ -14,8 +15,7 @@ const LoginForm = () => {
             localStorage.setItem("Atoken",res.data.AToken);
             localStorage.setItem("Rtoken",res.data.RToken);
             localStorage.setItem("username",id);
-            this.props.isLoggedIn = isLogined();
-
+            history.push('/');
         }).catch(err =>{
             console.log(err.response.data.message)
             var message =""
