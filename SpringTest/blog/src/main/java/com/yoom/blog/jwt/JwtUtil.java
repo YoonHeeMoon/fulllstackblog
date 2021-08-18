@@ -35,8 +35,9 @@ public class JwtUtil {
         return Jwts.builder()
         .setSubject("refreshToken")
         .setHeader(createHeader())
+        .claim("id", loginVO.getId())
         .setExpiration(new Date(now.getTime() + expiredTime * 48 * 7 ))//일주일
-        .signWith(SignatureAlgorithm.HS256,loginVO.getId()).compact();
+        .signWith(SignatureAlgorithm.HS256,SECRET_KEY).compact();
     }
 
     private Map<String, Object> createHeader() {
@@ -60,8 +61,8 @@ public class JwtUtil {
         if(now.after(exp)){
             return false;
         }else{
-            return true;
-        }
+            throw new RestException(HttpStatus.UNAUTHORIZED,ErrorCode.UNUSABLE_TOKEN);
+		}
     }
 
     public boolean isUsable(String token){
@@ -70,9 +71,8 @@ public class JwtUtil {
 					  .setSigningKey(SECRET_KEY)
 					  .parseClaimsJws(token).getBody(); 
 			return true;
-			
 		}catch (Exception e) {
-            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR,ErrorCode.UNUSABLE_TOKEN);
+            throw new RestException(HttpStatus.UNAUTHORIZED,ErrorCode.UNUSABLE_TOKEN);
 		}
 	}
 }

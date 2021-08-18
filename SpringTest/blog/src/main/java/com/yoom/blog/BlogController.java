@@ -17,7 +17,6 @@ public class BlogController {
     
     @GetMapping("/blogs")
     public List<Blog> showBlog(){
-        System.out.println("blog");
         return service.listBlogs();
     }
     @GetMapping("/blogs/{id}")

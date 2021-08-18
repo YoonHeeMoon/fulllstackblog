@@ -5,10 +5,10 @@ import LogoutForm from './LogoutForm';
 
 const Navbar = () => {
     
-    const isLoggedIn = useState(true);
+    const [isLoggedIn,setIsLoggedIn] = useState(true);
     let form;
     if(isLoggedIn){
-        form = <LoginForm />
+        form = <LoginForm setIsLoggedIn={setIsLoggedIn}/>
     }else{
         form = <LogoutForm/>
     }

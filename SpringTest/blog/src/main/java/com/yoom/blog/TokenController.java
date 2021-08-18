@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/token")
 public class TokenController {
     @Autowired JwtUtil jwtUtil;
-
-    @GetMapping("/exp")
-    public Boolean isExp (HttpServletRequest request){
+ 
+    @GetMapping("/refresh")
+    public Boolean refresh (HttpServletRequest request){
         final String token = request.getHeader("Authorization");
         return jwtUtil.isExpired(token);
     }   
